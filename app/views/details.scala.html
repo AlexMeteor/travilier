@@ -1,0 +1,25 @@
+@(productForm: Form[Place])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Place form") {
+
+	<h1>Place Detail</h1>
+	@helper.form(action = routes.Places.save()) {
+		<fieldset>
+		<legend>Place (@productForm("name").valueOr("New"))</legend>
+		@helper.inputText(productForm("id"))
+		@helper.inputText(productForm("name"))
+		@helper.textarea(productForm("description"))
+		</fieldset>
+		<input type="submit" class="btn primary">
+
+	}
+	
+
+    @if(productForm("id").value() != null) {
+  		@form(routes.Places.remove( Long.parseLong(productForm("id").value()) )) {
+        		<input type="submit" value="Delete" class="btn primary">
+    	}
+	}
+}

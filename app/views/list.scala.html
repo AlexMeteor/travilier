@@ -1,0 +1,22 @@
+@(places: List[Place])
+@import helper._
+@import helper.twitterBootstrap._
+
+@main("Place catalogue") {
+	<h1>All Places</h1>
+	<dl>
+	@for(place <- places) {
+		<dt>
+			<a href="@routes.Places.details(place.id)">
+			@place.id - @place.name
+			</a>
+		</dt>
+		<dd>@place.description</dd>
+		@form(routes.Places.remove( place.id )) {
+        	<input type="submit" value="Delete" class="btn primary">
+    	}
+	}
+	</dl>
+	<a href="@routes.Places.newPlace()" class="btn">
+	<i class="icon-plus"></i> New product</a>
+}
