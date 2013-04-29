@@ -1,1 +1,1 @@
-# Play Authenticate sample Java application
+# Travelier web based travelling plan software
