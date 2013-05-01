@@ -4,19 +4,19 @@
 
 @main("Place catalogue") {
 	<h1>All Places</h1>
-	<dl>
-	@for(place <- places) {
-		<dt>
-			<a href="@routes.Places.details(place.id)">
-			@place.id - @place.name
-			</a>
-		</dt>
-		<dd>@place.description</dd>
-		@form(routes.Places.remove( place.id )) {
-        	<input type="submit" value="Delete" class="btn primary">
-    	}
-	}
-	</dl>
+	<ul class="thumbnails">
+		@for(place <- places) {	
+	  		<li class="span2">
+	    		<a href="@routes.Places.details(place.id)" class="thumbnail">
+	      			<h3>@place.name</h3>
+	      			<p>@place.description</p>
+	      			@form(routes.Places.remove( place.id )) {
+	        			<input type="submit" value="Delete" class="btn-primary">
+	    			}
+	    		</a>
+	  		</li>
+		}
+	</ul>
 	<a href="@routes.Places.newPlace()" class="btn">
 	<i class="icon-plus"></i> New product</a>
 }
