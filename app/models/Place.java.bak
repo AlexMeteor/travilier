@@ -18,7 +18,7 @@ public class Place extends Model{
 	public double longtitude;
 	
 	@ManyToMany(mappedBy="places")
-	public List<Itinerary> itinarys;
+	public List<Itinary> itinarys;
 	
 	public Place()
 	{

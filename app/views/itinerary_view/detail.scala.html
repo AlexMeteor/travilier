@@ -1,0 +1,27 @@
+
+
+@(itineraryForm: Form[Itinerary])
+@import helper._
+@import helper.twitterBootstrap._
+<!--  
+@main("Itinerary form") {
+
+	<h1>Itinerary Detail</h1>
+	@helper.form(action = routes.Itineraries.save()) {
+		<fieldset>
+		<legend>Itinerary (@itineraryForm("name").valueOr("New"))</legend>
+		@helper.inputText(itineraryForm("id"))
+		@helper.inputText(itineraryForm("name"))
+		@helper.textarea(itineraryForm("description"))
+		</fieldset>
+		<input type="submit" class="btn primary">
+
+	}
+
+    @if(itineraryForm("id").value() != null) {
+  		@form(routes.Itineraries.remove( Long.parseLong(itineraryForm("id").value()) )) {
+        		<input type="submit" value="Delete" class="btn primary">
+    	}
+	}
+}
+-->

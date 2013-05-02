@@ -45,9 +45,15 @@ POST    /login/password/forgot     controllers.Signup.doForgotPassword
 
 GET		/places                     controllers.Places.list()
 GET     /places/new                 controllers.Places.newPlace()
-GET     /places/:id                controllers.Places.details(id: Long)
+GET     /places/:id                 controllers.Places.details(id: Long)
 POST    /places                     controllers.Places.save()
 POST    /places/:id/remove          controllers.Places.remove(id: Long)
+
+GET     /profile/itineraries        	controllers.Itineraries.list()
+GET     /profile/itineraries/new    	controllers.Itineraries.newItinerary()
+GET     /profile/itineraries/:id    	controllers.Itineraries.details(id: Long)
+POST    /profile/itineraries			controllers.Itineraries.save()
+POST    /profile/itineraries/:id/remove controllers.Itineraries.remove(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

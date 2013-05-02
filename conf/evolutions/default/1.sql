@@ -3,12 +3,12 @@
 
 # --- !Ups
 
-create table itinary (
+create table itinerary (
   id                        bigint not null,
   name                      varchar(255),
   description               varchar(255),
   users_id                  bigint,
-  constraint pk_itinary primary key (id))
+  constraint pk_itinerary primary key (id))
 ;
 
 create table linked_account (
@@ -66,10 +66,10 @@ create table user_permission (
 ;
 
 
-create table itinary_place (
-  itinary_id                     bigint not null,
+create table itinerary_place (
+  itinerary_id                   bigint not null,
   place_id                       bigint not null,
-  constraint pk_itinary_place primary key (itinary_id, place_id))
+  constraint pk_itinerary_place primary key (itinerary_id, place_id))
 ;
 
 create table users_security_role (
@@ -83,7 +83,7 @@ create table users_user_permission (
   user_permission_id             bigint not null,
   constraint pk_users_user_permission primary key (users_id, user_permission_id))
 ;
-create sequence itinary_seq;
+create sequence itinerary_seq;
 
 create sequence linked_account_seq;
 
@@ -97,8 +97,8 @@ create sequence users_seq;
 
 create sequence user_permission_seq;
 
-alter table itinary add constraint fk_itinary_users_1 foreign key (users_id) references users (id) on delete restrict on update restrict;
-create index ix_itinary_users_1 on itinary (users_id);
+alter table itinerary add constraint fk_itinerary_users_1 foreign key (users_id) references users (id) on delete restrict on update restrict;
+create index ix_itinerary_users_1 on itinerary (users_id);
 alter table linked_account add constraint fk_linked_account_user_2 foreign key (user_id) references users (id) on delete restrict on update restrict;
 create index ix_linked_account_user_2 on linked_account (user_id);
 alter table token_action add constraint fk_token_action_targetUser_3 foreign key (target_user_id) references users (id) on delete restrict on update restrict;
@@ -106,9 +106,9 @@ create index ix_token_action_targetUser_3 on token_action (target_user_id);
 
 
 
-alter table itinary_place add constraint fk_itinary_place_itinary_01 foreign key (itinary_id) references itinary (id) on delete restrict on update restrict;
+alter table itinerary_place add constraint fk_itinerary_place_itinerary_01 foreign key (itinerary_id) references itinerary (id) on delete restrict on update restrict;
 
-alter table itinary_place add constraint fk_itinary_place_place_02 foreign key (place_id) references place (id) on delete restrict on update restrict;
+alter table itinerary_place add constraint fk_itinerary_place_place_02 foreign key (place_id) references place (id) on delete restrict on update restrict;
 
 alter table users_security_role add constraint fk_users_security_role_users_01 foreign key (users_id) references users (id) on delete restrict on update restrict;
 
@@ -122,9 +122,9 @@ alter table users_user_permission add constraint fk_users_user_permission_user_0
 
 SET REFERENTIAL_INTEGRITY FALSE;
 
-drop table if exists itinary;
+drop table if exists itinerary;
 
-drop table if exists itinary_place;
+drop table if exists itinerary_place;
 
 drop table if exists linked_account;
 
@@ -144,7 +144,7 @@ drop table if exists user_permission;
 
 SET REFERENTIAL_INTEGRITY TRUE;
 
-drop sequence if exists itinary_seq;
+drop sequence if exists itinerary_seq;
 
 drop sequence if exists linked_account_seq;
 

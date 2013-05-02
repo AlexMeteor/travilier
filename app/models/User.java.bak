@@ -63,7 +63,7 @@ public class User extends Model implements Subject {
 	public List<UserPermission> permissions;
 	
 	@OneToMany(mappedBy="users")
-	public List<Itinerary> itinaries;
+	public List<Itinary> itinaries;
 
 	public static final Finder<Long, User> find = new Finder<Long, User>(
 			Long.class, User.class);

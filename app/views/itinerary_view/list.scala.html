@@ -1,0 +1,24 @@
+
+@(itineraries: List[Itinerary])
+@import helper._
+@import helper.twitterBootstrap._
+<!-- 
+@main("Itineraries catalogue") {
+	<h1>All Itineraries</h1>
+	<ul class="thumbnails">
+		@for(itinerary <- itineraries) {	
+	  		<li class="span2">
+	    		<a href="@routes.Itineraries.details( itinerary.id )" class="thumbnail">
+	      			<h3>@itinerary.name</h3>
+	      			<p>@itinerary.description</p>
+	      			@form(routes.Itineraries.remove( itinerary.id )) {
+	        			<input type="submit" value="Delete" class="btn-primary">
+	    			}
+	    		</a>
+	  		</li>
+		}
+	</ul>
+	<a href="@routes.Itineraries.newItinerary()" class="btn">
+	<i class="icon-plus"></i> New product</a>
+}
+-->
