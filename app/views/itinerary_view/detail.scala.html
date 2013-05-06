@@ -1,5 +1,3 @@
-
-
 @(itineraryForm: Form[Itinerary])
 @import helper._
 @import helper.twitterBootstrap._
@@ -10,7 +8,6 @@
 	@helper.form(action = routes.Itineraries.save()) {
 		<fieldset>
 		<legend>Itinerary (@itineraryForm("name").valueOr("New"))</legend>
-		@helper.inputText(itineraryForm("id"))
 		@helper.inputText(itineraryForm("name"))
 		@helper.textarea(itineraryForm("description"))
 		</fieldset>
