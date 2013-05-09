@@ -22,7 +22,8 @@
     <!-- Le styles -->
     <link href="@routes.Assets.at("stylesheets/main.min.css")" rel="stylesheet">
     <link href="@routes.Assets.at("css/bootstrap.min.css")" rel="stylesheet">
-    
+    <link href="@routes.Assets.at("css/bootstrap-responsive.min.css")" rel="stylesheet">
+    <link href="@routes.Assets.at("css/map.css")" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -50,7 +51,7 @@
             $('a[href="#profile"]').on('shown', function(e) {
                 google.maps.event.trigger(map, 'resize');
             });
-            $("#map_canvas").css("width", 1200).css("height", 600);
+            $("#map_canvas").css("width", 1000).css("height", 600);
         });
     });
     </script>
@@ -59,36 +60,15 @@
 
   <body>
 
-    <div class="navbar navbar-fixed-top">
+    <div class="container navbar" style="width:100%; margin-bottom:0px;z-index:0;">
       <div class="navbar-inner">
-        <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="@routes.Application.index()">Travelier</a>
-          
-          <div class="btn-group pull-right">
-          @subjectPresentOr() {
-          	@defining(Application.getLocalUser(session())) { user =>
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-              <i class="icon-user"></i> @user.name
-              <span class="caret"></span>
-            </a>
-            <ul class="dropdown-menu">
-              <li><a href="@routes.Application.profile()">@Messages("playauthenticate.navigation.profile")</a></li>
-              <li><a href="@routes.Account.link()">@Messages("playauthenticate.navigation.link_more")</a></li>
-              <li class="divider"></li>
-              <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()"><i class="icon-off"></i> @Messages("playauthenticate.navigation.logout")</a></li>
-            </ul>
-            }
-          }{
-            <a href="@routes.Application.login()" class="btn btn-primary btn-mini @("disabled".when(nav == "login"))">@Messages("playauthenticate.navigation.login")</a>
-          }
-          </div>
 
-          
           <div class="nav-collapse">
             <ul class="nav">
               <li class="@("active".when(nav == ""))"><a href="@routes.Application.index()">@Messages("playauthenticate.navigation.home")</a></li>
@@ -99,8 +79,49 @@
 			    }
             </ul>
           </div><!--/.nav-collapse -->
-        </div>
+
+          <div class="btn-group pull-left">
+              @subjectPresentOr() {
+              @defining(Application.getLocalUser(session())) { user =>
+              <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                  <i class="icon-user"></i> @user.name
+                  <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                  <li><a href="@routes.Application.profile()">@Messages("playauthenticate.navigation.profile")</a></li>
+                  <li><a href="@routes.Account.link()">@Messages("playauthenticate.navigation.link_more")</a></li>
+                  <li class="divider"></li>
+                  <li><a href="@com.feth.play.module.pa.controllers.routes.Authenticate.logout()"><i class="icon-off"></i> @Messages("playauthenticate.navigation.logout")</a></li>
+              </ul>
+              }
+              }{
+              <a href="@routes.Application.login()" class="btn btn-primary btn-mini @("disabled".when(nav == "login"))">@Messages("playauthenticate.navigation.login")</a>
+              }
+          </div>
+
       </div>
+    </div>
+
+    <div class="menu" id="menu">
+        <div class="wrapper">
+            <div class="logo">
+                <a href="./">
+                    <img src="http://mappedinisrael.com/images/logo.png" alt="Israeli Startup Map" title="Israeli Startup Map">
+                </a>
+            </div>
+            <div class="blurb">
+                <div style="margin-top:-11px"><b>The Israeli startup map</b><!--<b>One map.<br> Smaller than New Jersey.<br> Thousands of startups</b>. --></div>
+            </div>
+            <div class="buttons">
+                <a href="about.php" class="btn btn-large btn-info" alt="About the Israeli Startup Map">More Info</a>
+                <a href="addcompany.php" class="btn btn-large btn-inverse" alt="Add a company">Add a Company</a>
+            </div>
+            <div style="margin-top:0px; margin-left:16px;font-size:12px;font-weight:normal"> <a href="/update-request.php">Update your company</a> | <a href="sss.com">Support</a>
+            </div>
+            <div class="search">
+                <input type="text" name="search" id="search" placeholder="Type a company name..." data-provide="typeahead" autocomplete="off">
+            </div>
+        </div>
     </div>
 
     <div class="container">
@@ -115,7 +136,7 @@
 	      </div>
 	    }
 		@content
-		
+
     <hr>
 
       <footer>

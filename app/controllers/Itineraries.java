@@ -1,10 +1,11 @@
 package controllers;
 import models.Itinerary;
+import models.Place;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import views.html.itinerary_view.*;
-
+import java.util.ArrayList;
 
 public class Itineraries extends Controller {
 	
@@ -15,16 +16,16 @@ public class Itineraries extends Controller {
 	}
 	
 	public static Result newItinerary() {
-		return ok( detail.render(itineraryForm));
+		return ok( detail.render(itineraryForm , new ArrayList(),  Place.findAll()));
 	}
 	
 	public static Result details(Long id) {
 		Itinerary itinerary = Itinerary.find().byId(id);
 		 if (itinerary == null)
-			 return notFound(String.format("Product %s does not exist.", id));
+			 return notFound(String.format("Itinerary %s does not exist.", id));
 		
 		 Form<Itinerary> filledForm = itineraryForm.fill(itinerary);
-			 return ok( detail.render(filledForm));
+			 return ok( detail.render(filledForm, itinerary.places, Place.findAll()));
 		 
 	}
 	
@@ -32,7 +33,7 @@ public class Itineraries extends Controller {
 		Form<Itinerary> boundForm = itineraryForm.bindFromRequest();
 		if(boundForm.hasErrors()) {
 			flash("error", "Please correct the form below.");
-			return badRequest(detail.render(boundForm));
+			return badRequest(detail.render(boundForm, new ArrayList(),  Place.findAll()));
 		}
 		Itinerary itinerary = boundForm.get();
 		System.out.println( "Itinary id " + itinerary.id + "Itinerary name " + itinerary.name);
@@ -46,5 +47,16 @@ public class Itineraries extends Controller {
 		Itinerary.remove(id);
 		return redirect(routes.Itineraries.list());
 	}
+
+    public static Result addPlace(Long id,  Long pid)
+    {
+        Itinerary itinerary = Itinerary.find().byId(id);
+        if (itinerary == null)
+            return notFound(String.format("Itinerary %s does not exist.", id));
+
+        itinerary.places.add(Place.find().byId(pid));
+        itinerary.save();
+        return redirect(routes.Itineraries.list());
+    }
 }
 

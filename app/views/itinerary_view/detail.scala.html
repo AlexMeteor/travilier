@@ -1,23 +1,57 @@
-@(itineraryForm: Form[Itinerary])
+@(itineraryForm: Form[Itinerary], places: List[Place],  all_places: List[Place])
 @import helper._
 @import helper.twitterBootstrap._
 
 @main("Itinerary form") {
 
 	<h1>Itinerary Detail</h1>
-	@helper.form(action = routes.Itineraries.save()) {
-		<fieldset>
-		<legend>Itinerary (@itineraryForm("name").valueOr("New"))</legend>
-		@helper.inputText(itineraryForm("name"))
-		@helper.textarea(itineraryForm("description"))
-		</fieldset>
-		<input type="submit" class="btn primary">
-
-	}
-
-    @if(itineraryForm("id").value() != null) {
-  		@form(routes.Itineraries.remove( Long.parseLong(itineraryForm("id").value()) )) {
-        		<input type="submit" value="Delete" class="btn primary">
-    	}
-	}
+    <div class = row>
+        <div class="span3">
+        @helper.form(action = routes.Itineraries.save()) {
+            <fieldset>
+            <legend>Itinerary (@itineraryForm("name").valueOr("New"))</legend>
+            @helper.inputText(itineraryForm("name"))
+            @helper.textarea(itineraryForm("description"))
+            </fieldset>
+            <input type="submit" class="btn primary">
+        }
+        @if(itineraryForm("id").value() != null) {
+            @form(routes.Itineraries.remove( Long.parseLong(itineraryForm("id").value()) )) {
+                    <input type="submit" value="Delete" class="btn primary">
+            }
+        }
+        </div>
+        <div class="span8">
+            <h1>Selected Places</h1>
+            <ul class="thumbnails">
+                @for(place <- places) {
+                    <li class="span2">
+                        <a href="@routes.Places.details(place.id)" class="thumbnail">
+                            <h3>@place.name</h3>
+                            <p>@place.description</p>
+                            @form(routes.Places.remove( place.id )) {
+                            <input type="submit" value="Delete" class="btn-primary">
+                            }
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+    <div class = row>
+        <h1>All Places</h1>
+        <ul class="thumbnails">
+            @for(place <- all_places) {
+                <li class="span2">
+                    <a href="@routes.Places.details(place.id)" class="thumbnail">
+                        <h3>@place.name</h3>
+                        <p>@place.description</p>
+                        @form(routes.Itineraries.addPlace( Long.parseLong(itineraryForm("id").value()),  place.id )) {
+                            <input type="submit" value="Add to Intinerary" class="btn-primary">
+                        }
+                    </a>
+                </li>
+            }
+        </ul>
+    </div>
 }

@@ -54,6 +54,7 @@ GET     /profile/itineraries/new    	controllers.Itineraries.newItinerary()
 GET     /profile/itineraries/:id    	controllers.Itineraries.details(id: Long)
 POST    /profile/itineraries			controllers.Itineraries.save()
 POST    /profile/itineraries/:id/remove controllers.Itineraries.remove(id: Long)
+POST    /profile/itineraries/:id/addplace/:pid controllers.Itineraries.addPlace( id: Long, pid: Long)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
