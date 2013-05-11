@@ -1,4 +1,4 @@
-@(title: String, nav: String = "")(content: Html)
+@(title: String, nav: String = "")(menu_list: Html)(content: Html)
 
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
@@ -119,27 +119,7 @@
       </div>
     </div>
 
-    <div class="menu" id="menu">
-        <div class="wrapper">
-            <div class="logo">
-                <a href="./">
-                    <img src="http://mappedinisrael.com/images/logo.png" alt="Israeli Startup Map" title="Israeli Startup Map">
-                </a>
-            </div>
-            <div class="blurb">
-                <div style="margin-top:-11px"><b>The Israeli startup map</b><!--<b>One map.<br> Smaller than New Jersey.<br> Thousands of startups</b>. --></div>
-            </div>
-            <div class="buttons">
-                <a href="about.php" class="btn btn-large btn-info" alt="About the Israeli Startup Map">More Info</a>
-                <a href="addcompany.php" class="btn btn-large btn-inverse" alt="Add a company">Add a Company</a>
-            </div>
-            <div style="margin-top:0px; margin-left:16px;font-size:12px;font-weight:normal"> <a href="/update-request.php">Update your company</a> | <a href="sss.com">Support</a>
-            </div>
-            <div class="search">
-                <input type="text" name="search" id="search" placeholder="Type a company name..." data-provide="typeahead" autocomplete="on">
-            </div>
-        </div>
-    </div>
+   @menu_list
 
     <div class="container-fluid">
 	    @if(flash.contains(Application.FLASH_ERROR_KEY)) {
