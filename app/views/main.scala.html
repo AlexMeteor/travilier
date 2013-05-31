@@ -1,4 +1,4 @@
-@(title: String, nav: String = "")(menu_list: Html)(content: Html)
+@(title: String, nav: String = "")(content: Html)(menu_list: Html)
 
 @import be.objectify.deadbolt.java.views.html._
 @import be.objectify.deadbolt.core.utils.TemplateUtils._
@@ -42,7 +42,8 @@
         offsetTop = 60; // Calculate the top offset
         $('#map_canvas').css('height', (h - offsetTop));
 
-        var settingsItemsMap = {
+        var settingsItemsMap =
+        {
             zoom: 12,
             center: new google.maps.LatLng(40.768516981, -73.96927308),
             zoomControlOptions: {
@@ -62,15 +63,30 @@
 
         map.setCenter(myMarker.position);
             myMarker.setMap(map);
+     }
+
+     google.maps.event.addDomListener(window, "load", initialize);
+
+     $(window).resize(function () {
+        var h = $(window).height(),
+        offsetTop = 60; // Calculate the top offset
+        $('#map_canvas').css('height', (h - offsetTop));
+     }).resize();
+
+
+        // toggle (hide/show) markers of a given type (on the map)
+         function toggle(type) {
+            if($("#filter_"+type).attr('checked') == "checked") {
+                show(type);
+            } else {
+                 hide(type);
+            }
+         }
+
+        // toggle (hide/show) marker list of a given type
+        function toggleList(type) {
+             $("#list .list-"+type).toggle();
         }
-
-        google.maps.event.addDomListener(window, "load", initialize);
-
-        $(window).resize(function () {
-            var h = $(window).height(),
-            offsetTop = 60; // Calculate the top offset
-            $('#map_canvas').css('height', (h - offsetTop));
-          }).resize();
     </script>
 
   </head>
@@ -119,7 +135,7 @@
       </div>
     </div>
 
-   @menu_list
+    @menu_list
 
     <div class="container-fluid">
 	    @if(flash.contains(Application.FLASH_ERROR_KEY)) {

@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import models.User;
+import models.Place;
 import play.Routes;
 import play.data.Form;
 import play.mvc.*;
@@ -29,7 +30,7 @@ public class Application extends Controller {
 	public static final String USER_ROLE = "user";
 	
 	public static Result index() {
-		return ok(index.render());
+		return ok(index.render(Place.findAll()));
 	}
 
 	public static User getLocalUser(final Session session) {
