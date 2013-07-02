@@ -5,6 +5,7 @@ import java.util.Date;
 
 import models.User;
 import models.Place;
+import models.Itinerary;
 import play.Routes;
 import play.data.Form;
 import play.mvc.*;
@@ -30,7 +31,7 @@ public class Application extends Controller {
 	public static final String USER_ROLE = "user";
 	
 	public static Result index() {
-		return ok(index.render(Place.findAll()));
+		return ok(index.render(Itinerary.findAll()));
 	}
 
 	public static User getLocalUser(final Session session) {
